@@ -27,8 +27,8 @@ const validateEmail = async (req, res, next) => {
 }
 
 const validateFilter = async (req, res, next) => {
-  const { searchTerm } = req.body;
-  if (!searchTerm) {
+  const { searchTerm, orderByName } = req.body;
+  if (!searchTerm && !orderByName) {
     res.status(400).json({
       status: 0,
       message: "Missing searchTerm",

@@ -39,17 +39,14 @@ exports.findById = (id) => {
 };
 
 exports.searchCustomer = async (searchParams) => {
-  const {searchTerm, orderById, orderByName} = searchParams;
+  const { searchTerm, orderByName } = searchParams;
   return await Customer.findAll({
     where: {
       name: {
         [Op.like]: `%${searchTerm}%`,
       },
     },
-    order: [
-      ['id', orderById],
-      ['name', orderByName],
-    ],
+    order: [["name", orderByName]],
   })
     .then((customer) => {
       return customer;
