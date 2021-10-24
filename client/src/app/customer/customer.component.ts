@@ -5,6 +5,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 import * as _ from 'lodash';
 import { NgForm } from '@angular/forms';
 import { Customer } from '../models/customer';
+import { ToastrService } from 'ngx-toastr';
 import {
   FormBuilder,
   FormControl,
@@ -57,7 +58,7 @@ export class CustomerComponent implements OnInit {
   paginator!: MatPaginator;
   isEditMode = false;
 
-  constructor(private customerService: CustomerService, fb: FormBuilder) {
+  constructor(private customerService: CustomerService, fb: FormBuilder, private toastr: ToastrService) {
     this.options = fb.group({
       color: this.colorControl,
     });
@@ -67,6 +68,7 @@ export class CustomerComponent implements OnInit {
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
     this.getAllCustomers();
+    
   }
 
   getAllCustomers() {
@@ -87,34 +89,40 @@ export class CustomerComponent implements OnInit {
   }
 
   saveCustomer(): void {
-    var data = {
-      name: this.customer.name,
-      email: this.customer.email,
-      address: this.customer.address,
-      phone: this.customer.phone,
-      customerId: '',
-    };
 
-    if (this.customer.id) {
-      data.customerId = this.customer.id;
-      this.customerService.updateCustomer(data).subscribe(
-        (response) => {
-          this.getAllCustomers();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    if(!this.customer.name || !this.customer.email || !this.customer.address || !this.customer.phone  ){
+      this.toastr.warning('Validation Error!');
     } else {
-      this.customerService.createCustomer(data).subscribe(
-        (response) => {
-          this.getAllCustomers();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      var data = {
+        name: this.customer.name,
+        email: this.customer.email,
+        address: this.customer.address,
+        phone: this.customer.phone,
+        customerId: '',
+      };
+  
+      if (this.customer.id) {
+        data.customerId = this.customer.id;
+        this.customerService.updateCustomer(data).subscribe(
+          (response) => {
+            this.getAllCustomers();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      } else {
+        this.customerService.createCustomer(data).subscribe(
+          (response) => {
+            this.getAllCustomers();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
     }
+    
   }
 
   updateCustomerStatus(element: any) {

@@ -5,11 +5,11 @@ import { CustomerComponent } from './customer/customer.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/customers',
+    redirectTo: '/customer-service',
     pathMatch: 'full'
   },
   {
-    path: 'customers',
+    path: 'customer-service',
     component: CustomerComponent
   }
 ];

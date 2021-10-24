@@ -18,7 +18,13 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static(path.join(__dirname, 'client/dist/client')));
+} else {
+  app.use(express.static(path.join(__dirname, 'public')));
+}
+
 app.use(
   cors({
     origin: "*",
@@ -30,5 +36,11 @@ app.use(
 
 app.use("/", indexRouter);
 app.use("/customers", customerRouter);
+
+
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname,'client/dist//client/index.html'));
+})
+
 
 module.exports = app;
