@@ -58,7 +58,11 @@ export class CustomerComponent implements OnInit {
   paginator!: MatPaginator;
   isEditMode = false;
 
-  constructor(private customerService: CustomerService, fb: FormBuilder, private toastr: ToastrService) {
+  constructor(
+    private customerService: CustomerService,
+    fb: FormBuilder,
+    private toastr: ToastrService
+  ) {
     this.options = fb.group({
       color: this.colorControl,
     });
@@ -68,7 +72,6 @@ export class CustomerComponent implements OnInit {
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
     this.getAllCustomers();
-    
   }
 
   getAllCustomers() {
@@ -89,8 +92,12 @@ export class CustomerComponent implements OnInit {
   }
 
   saveCustomer(): void {
-
-    if(!this.customer.name || !this.customer.email || !this.customer.address || !this.customer.phone  ){
+    if (
+      !this.customer.name ||
+      !this.customer.email ||
+      !this.customer.address ||
+      !this.customer.phone
+    ) {
       this.toastr.warning('Validation Error!');
     } else {
       var data = {
@@ -100,7 +107,7 @@ export class CustomerComponent implements OnInit {
         phone: this.customer.phone,
         customerId: '',
       };
-  
+
       if (this.customer.id) {
         data.customerId = this.customer.id;
         this.customerService.updateCustomer(data).subscribe(
@@ -122,7 +129,6 @@ export class CustomerComponent implements OnInit {
         );
       }
     }
-    
   }
 
   updateCustomerStatus(element: any) {

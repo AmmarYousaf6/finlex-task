@@ -5,11 +5,7 @@ const customerMiddleware = require("../middlewares/customer.middleware");
 
 router.get("/", customerApi.getCustomers);
 router.get("/:id", customerApi.getCustomerById);
-router.post(
-  "/search",
-  customerMiddleware.validateFilter,
-  customerApi.search
-);
+router.post("/search", customerMiddleware.validateFilter, customerApi.search);
 router.delete("/:customerId", customerApi.removeCustomer);
 router.post(
   "/add",

@@ -35,7 +35,7 @@ const getCustomerById = async (req, res) => {
 
 const search = async (req, res) => {
   const searchParams = req.body;
-  console.log(searchParams)
+  console.log(searchParams);
   const results = await customerController.searchCustomer(searchParams);
   if (results) {
     res.status(200).json({

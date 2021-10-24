@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       validate: {
-        isEmail: true
-      }
+        isEmail: true,
+      },
     },
     address: {
       type: DataTypes.STRING,
@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     status: {
       type: DataTypes.ENUM,
-      values : ['active', 'inactive'],
-      defaultValue : 'active'
+      values: ["active", "inactive"],
+      defaultValue: "active",
     },
   });
 

@@ -10,10 +10,10 @@ test("should Get status 200", async () => {
 //CheckRandomObject
 test("should pass if all parameters exists", async () => {
   const response = await request(app).post(`/customers/add`).send({
-    name: "Shirt",
-    slug: "Clothes",
-    sku: "LEE",
-    relevantBrand: "Levis",
+    name: "Ammar",
+    email: "ammar@google.com",
+    address: "Islamabad",
+    phone: "+92331424",
   });
   const results = JSON.parse(response.text);
   expect(results).toHaveProperty("message");
@@ -23,9 +23,9 @@ test("should pass if all parameters exists", async () => {
 //Check Correct Input
 test("should fail if missing parameters", async () => {
   const response = await request(app).post(`/customers/add`).send({
-    name: "Shirt",
-    slug: "Clothes",
-    sku: "LEE",
+    name: "Ammar",
+    email: "ammar@google.com",
+    address: "Islamabad",
   });
   const results = JSON.parse(response.text);
   expect(results).toMatchObject({
@@ -48,7 +48,7 @@ test("should fail if provided 1 parameter", async () => {
 
 //Should hava a parameter
 test("should have a parameter for 200", async () => {
-  const response = await request(app).get("/customers/3");
+  const response = await request(app).get("/customers/6");
   expect(response.status).toBe(200);
 });
 
