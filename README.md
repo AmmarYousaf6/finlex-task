@@ -4,7 +4,7 @@
 
 ## Installation
 
-Install [Node](https://nodejs.org/en/) & [MySql](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/) & [Angular](https://angular.io/guide/setup-local) & [Docker](https://docs.docker.com/compose/gettingstarted/)
+Install [Node](https://nodejs.org/en/) & [MySql](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/) & [Angular](https://angular.io/guide/setup-local) & [Angular Material](https://material.angular.io/guide/getting-started) & [Docker](https://docs.docker.com/compose/gettingstarted/)
 
 ## Usage
 
@@ -27,13 +27,29 @@ After installation, clone the repository and run the following commands in termi
 
     - Note: Once you provide the correct credentials, a new table with respecitve columns will be created automatically with the name of products.
 
+## Hosting Live
+
+Finlex customer service is up and running on URL https://finlex-app.herokuapp.com/customer-service
+
 ## Run Server
 
 Run the following commands to run server
 
 - npm start
-  - Node - http://localhost:3000
+
+  - Node - http://localhost:3000 (This should start the Client side as well. Plese check your browser http://localhost:3000/customer-service)
+
+- ng serve
   - Angular - http://localhost:4200/customer-service
+
+## Docker
+
+Run the envrironment on docker by running the following commands on root directory.
+
+- cd finlex-task
+- docker build -t finlex/node-app -f Dockerfile .
+- docker run -d -it -p 3005:3000/tcp --name node-app finlex/node-app:latest
+- Server should be running on localhost:3005
 
 ## Test
 
@@ -47,7 +63,7 @@ Run the following commands to run test cases
 
 ## Video
 
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://drive.google.com/file/d/14WXzU1FgxAKe6w2YZRquUbEvAsdEVvKK/view?usp=sharing)
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://drive.google.com/file/d/1Ev80_UC-Tiyw0_Tl4vKIu7Ih1PPYLMed/view?usp=sharing)
 
 ## Architecture
 
@@ -63,7 +79,7 @@ Once the client app is ready, Client will accept data from Server, and server wi
 
     - Node ^14
     - Express
-    - Angular
+    - Angular && Material UI Design
     - MySql
     - Jest
     - Prettier
