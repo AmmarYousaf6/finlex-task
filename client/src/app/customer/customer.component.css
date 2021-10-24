@@ -1,0 +1,8 @@
+.status {
+  cursor: pointer;
+  text-decoration: underline;
+  text-transform: capitalize;
+}
+.form-control-fields {
+  margin: 10px;
+}
