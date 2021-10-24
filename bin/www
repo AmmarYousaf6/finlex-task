@@ -6,7 +6,7 @@
  */
 
 var app = require("../app");
-var debug = require("debug")("otrium-task:server");
+var debug = require("debug")("finlex-task:server");
 var http = require("http");
 
 /**
