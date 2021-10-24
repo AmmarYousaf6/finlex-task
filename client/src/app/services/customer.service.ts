@@ -8,12 +8,13 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Customer } from '../models/customer';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CustomerService {
-  base_Url = 'http://localhost:3000/customers';
+  base_Url = environment.API_URL;
 
   constructor(private _http: HttpClient) {}
 
