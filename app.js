@@ -1,7 +1,7 @@
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 const cors = require("cors");
 
 const db = require("./app/models");
@@ -9,10 +9,10 @@ const CustomerController = require("./app/controllers/customer.controller");
 
 db.sequelize.sync();
 
-var indexRouter = require("./app/routes/index");
-var customerRouter = require("./app/routes/customer");
+const indexRouter = require("./app/routes/index");
+const customerRouter = require("./app/routes/customer");
 
-var app = express();
+const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
