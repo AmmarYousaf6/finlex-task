@@ -5,42 +5,24 @@ const Op = Sequelize.Op;
 
 exports.create = (customer) => {
   return Customer.create({
-    name: customer.name,
+    namse: customer.name,
     email: customer.email,
     address: customer.address,
     phone: customer.phone,
-  })
-    .then((response) => {
-      return response;
-    })
-    .catch((err) => {
-      return err;
-    });
+  });
 };
 
 exports.findAll = () => {
-  return Customer.findAll()
-    .then((results) => {
-      return results;
-    })
-    .catch((err) => {
-      return err;
-    });
+  return Customer.findAll();
 };
 
 exports.findById = (id) => {
-  return Customer.findByPk(id)
-    .then((customer) => {
-      return customer;
-    })
-    .catch((err) => {
-      return err;
-    });
+  return Customer.findByPk(id);
 };
 
 exports.searchCustomer = async (searchParams) => {
   const { searchTerm, orderByName } = searchParams;
-  return await Customer.findAll({
+  const customer = await Customer.findAll({
     where: {
       name: {
         [Op.like]: `%${searchTerm}%`,
@@ -48,12 +30,7 @@ exports.searchCustomer = async (searchParams) => {
     },
     order: [["name", orderByName]],
   })
-    .then((customer) => {
-      return customer;
-    })
-    .catch((err) => {
-      return err;
-    });
+   return customer;
 };
 
 exports.deleteAll = async (id) => {
@@ -75,7 +52,7 @@ exports.deleteCustomer = async (id) => {
 
 exports.updateStatus = async (body) => {
   const { customerId, status } = body;
-  return await Customer.update(
+  const updateCustomerStatus =  await Customer.update(
     {
       status: status,
     },
@@ -85,17 +62,18 @@ exports.updateStatus = async (body) => {
       },
     }
   )
-    .then((id) => {
-      return this.findById(customerId);
-    })
-    .catch((err) => {
-      return err;
-    });
+  if(updateCustomerStatus){
+    return this.findById(customerId);
+  } else {
+    return 0;
+  }
+   
+  
 };
 
 exports.updateCustomer = async (body) => {
   const { customerId, name, email, address, phone } = body;
-  return await Customer.update(
+  const updateCustomer = await Customer.update(
     {
       name: name,
       email: email,
@@ -108,12 +86,11 @@ exports.updateCustomer = async (body) => {
       },
     }
   )
-    .then((id) => {
-      return this.findById(customerId);
-    })
-    .catch((err) => {
-      return err;
-    });
+  if(updateCustomer){
+    return this.findById(customerId);
+  }
+      
+   
 };
 
 exports.bulkCreate = (customer) => {
