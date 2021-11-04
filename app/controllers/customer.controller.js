@@ -5,7 +5,7 @@ const Op = Sequelize.Op;
 
 exports.create = (customer) => {
   return Customer.create({
-    namse: customer.name,
+    name: customer.name,
     email: customer.email,
     address: customer.address,
     phone: customer.phone,
@@ -94,11 +94,5 @@ exports.updateCustomer = async (body) => {
 };
 
 exports.bulkCreate = (customer) => {
-  return Customer.bulkCreate(customer)
-    .then((response) => {
-      return response;
-    })
-    .catch((err) => {
-      return err;
-    });
+  return Customer.bulkCreate(customer);
 };
